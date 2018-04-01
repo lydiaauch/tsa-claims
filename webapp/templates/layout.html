@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <script src="/static/js/main.js"></script>
+    <title>TSA Claims Data Exploration</title>
+</head>
+<body>
+    <div id="header">
+        <img id="tsa_logo" src="{{url_for('static', filename='tsa.png')}}" alt="TSA Logo">
+        <h1>This is a site to visualize TSA Claims Data from 2010-2013.</h1>
+        <img id="menu" src="{{url_for('static', filename='menu.png')}}" alt="MENU" onclick="toggleMenu()">
+        <div id="dropdown">
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+        </div>
+    </div>
+    {% block content %}{% endblock %}
+</body>
+</html>

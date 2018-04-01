@@ -1,0 +1,84 @@
+body {
+    background: white;
+    color: black;
+}
+
+#header {
+    height: 15%;
+    width: 100%;
+    display: inline-block;
+    background: darkgrey;
+    overflow: auto;
+}
+
+#header h1 {
+    width: 60%;
+    float: left;
+    margin: 0 10%;
+    padding-top: 20px;
+}
+
+#header img {
+    height:50%;
+    max-height: 40px;
+    padding: 5px;
+}
+
+#tsa_logo {
+    float: left;
+}
+
+#menu {
+    float: right;
+    cursor: pointer;
+}
+
+#menu:hover {
+    color: cadetblue;
+}
+
+#dropdown {
+    display: none;
+    position: absolute;
+    background-color: cadetblue;
+    z-index: 1;
+    width: 10%;
+    right: 0;
+    margin-right: 8px;
+    margin-top: 37px;
+    border: solid white 1px;
+}
+
+#dropdown a {
+    color: dimgray;
+    margin: auto;
+    text-decoration: none;
+    display: block;
+    padding: 3px 5px;
+    text-align: center;
+}
+
+#dropdown a:hover {
+    color: black;
+}
+
+#about {
+    border: solid cadetblue 1px;
+    width: 100%;
+    margin: 5px auto;
+    padding-left: 15px;
+}
+
+#footer {
+    height: 50px;
+    width: 100%;
+    display: inline-block;
+    background: darkgrey;
+    position: absolute;
+    bottom: 0;
+}
+
+#footer a {
+    color: black;
+    text-decoration: underline;
+}

@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="/static/css/vis.css" />
+{% extends "layout.html" %}
+{% block content %}
+<div id="map"></div>
+<div id="graphs">
+    <h3>Do you want to minimize your risk of losing your belongings?</h3>
+    <div id="airline">
+        <p>If you want to keep your baggage you should fly AIRLINE PLACEHOLDER THING.</p>
+    </div>
+    <div id="airport">
+        <p>If you want to keep your baggage you should avoid flying to/from AIRPORT PLACEHOLDER THING.</p>
+    </div>
+</div>
+<div id="ml">
+    <h3>What about if you want to lose your luggage and capitalize on that loss??</h3>
+    <p>Below is an attempt to predict your potential return on lost items based on airline and airport!</p>
+    <table></table>
+</div>
+{% endblock %}
