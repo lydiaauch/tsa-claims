@@ -27,7 +27,8 @@ def scrub_data(df):
 
     return df
 
-if __name__ == '__main__':
+def get_data():
+    # Return DF for visualizations
     df = get_df()
     scrubbed = scrub_data(df)
-    print(scrubbed)
+    return scrubbed

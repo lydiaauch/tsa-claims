@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/static/css/style.css" />
-    <script src="/static/js/main.js"></script>
     <title>TSA Claims Data Exploration</title>
 </head>
 <body>
     <div id="header">
         <img id="tsa_logo" src="{{url_for('static', filename='tsa.png')}}" alt="TSA Logo">
-        <h1>This is a site to visualize TSA Claims Data from 2010-2013.</h1>
+        <h1>Visualizing TSA Claims Data</h1>
         <img id="menu" src="{{url_for('static', filename='menu.png')}}" alt="MENU" onclick="toggleMenu()">
         <div id="dropdown">
             <a href="/">Home</a>
@@ -17,5 +16,10 @@
         </div>
     </div>
     {% block content %}{% endblock %}
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/charts.js"></script>
 </body>
 </html>

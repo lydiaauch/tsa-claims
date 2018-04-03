@@ -64,18 +64,17 @@ body {
 
 #about {
     border: solid cadetblue 1px;
-    width: 100%;
     margin: 5px auto;
-    padding-left: 15px;
+    padding: 20px;
 }
 
 #footer {
     height: 50px;
-    width: 100%;
-    display: inline-block;
     background: darkgrey;
     position: absolute;
     bottom: 0;
+    margin: 5px auto;
+    padding: 5px 20px;
 }
 
 #footer a {
