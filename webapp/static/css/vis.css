@@ -15,7 +15,8 @@
     text-align: center;
 }
 
-#graphs div #barchart {
+#graphs div #barchart,
+#graphs div #airline_barchart {
     width: 450px;
     height: 200px;
     border: none;
