@@ -10,5 +10,5 @@ To start the webserver:
     - SQLAlchemy
     - Scikit-learn
 - Create database -> python create_db.py
-- Run the command -> python webapp/app.py
+- Start the webserver -> python webapp/app.py
 - Go to localhost:5000
