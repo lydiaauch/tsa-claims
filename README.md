@@ -7,6 +7,8 @@ To start the webserver:
     - Python2.7
     - Flask
     - Pandas
+    - SQLAlchemy
     - Scikit-learn
+- Create database -> python create_db.py
 - Run the command -> python webapp/app.py
 - Go to localhost:5000
