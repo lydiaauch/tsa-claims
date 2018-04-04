@@ -15,6 +15,17 @@
 <div id="ml">
     <h3>What about if you want to lose your luggage and capitalize on that loss??</h3>
     <p>Below is an attempt to predict your potential return on lost items based on airline or airport!</p>
-    <table id="ml_table"></table>
+    <div id="compare_airport">
+        <p>Predict claims settlement value based on airport!</p>
+        {{ tables[0]|safe }}
+    </div>
+    <div id="compare_airline">
+        <p>Predict claims settlement value based on airline!</p>
+        {{ tables[1]|safe }}
+    </div>
+    <div id="metrics">
+        <p>Which is the better predictor of settlement?</p>
+        {{ tables[2]|safe }}
+    </div>
 </div>
 {% endblock %}

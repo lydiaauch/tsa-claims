@@ -76,18 +76,6 @@ def get_airlines_data(df):
 
     return data
 
-def make_ml_table(df):
-    ml_df = df[['airline_name','airport_code', 'claim_type', 'close_amount', 'disposition']]
-    ml_df = ml_df.dropna(axis=0, how='any')
-
-    # Drop rows if missing values
-    ml_df = ml_df[ml_df.disposition != '-']
-
-    # convert monetary value to number
-    ml_df[['close_amount']] = ml_df[['close_amount']].replace('[\$,]', '', regex=True).astype(float)
-
-    return ml_df
-
 def run_ml(df):
     """
     Predict settlement based on airport/airline
@@ -103,6 +91,17 @@ def run_ml(df):
 
     return [airport_pred, airline_pred]
 
+def make_ml_table(df):
+    ml_df = df[['airline_name','airport_code', 'claim_type', 'close_amount', 'disposition']]
+    ml_df = ml_df.dropna(axis=0, how='any')
+
+    # Drop rows if missing values
+    ml_df = ml_df[ml_df.disposition != '-']
+
+    # convert monetary value to number
+    ml_df[['close_amount']] = ml_df[['close_amount']].replace('[\$,]', '', regex=True).astype(float)
+
+    return ml_df
 
 def airport_ml(test, train, df):
     """
@@ -131,8 +130,7 @@ def airport_ml(test, train, df):
     MSE = 'MSE: {0:f}'.format(mse)
     R2 = 'RSquared: {0:f}'.format(r2)
 
-    return [compare[0:20], MSE, R2]
-
+    return [compare[0:10], MSE, R2]
 
 def airline_ml(test, train, df):
     """
@@ -161,5 +159,5 @@ def airline_ml(test, train, df):
     MSE = 'MSE: {0:f}'.format(mse)
     R2 = 'RSquared: {0:f}'.format(r2)
 
-    return [compare[0:20], MSE, R2]
+    return [compare[0:10], MSE, R2]
 

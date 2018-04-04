@@ -42,6 +42,19 @@
     text-align: center;
 }
 
+#ml div {
+    width: 27%;
+    height: 75%;
+    float: left;
+    border: solid 1px;
+    margin: 1% 3%;
+    text-align: center;
+}
+
+#ml table {
+    margin: auto;
+}
+
 .bar {
     fill: black;
 }
