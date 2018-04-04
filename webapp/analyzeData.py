@@ -1,7 +1,10 @@
 import pandas as pd
+import numpy as np
+from sklearn.ensemble import RandomForestRegressor
+from sklearn import preprocessing
+from sklearn import metrics
 import json
-from flask import jsonify
-import getData
+
 
 def claims_by_field(field, df):
     """
@@ -60,6 +63,8 @@ def get_airlines_data(df):
     Format airline data
     """
     airlines = claims_by_field('airline', df)
+    airlines = airlines[airlines.airline_name != '-']
+
     airline_bad = airlines[0:20]
     airline_good = airlines.loc[airlines['claims_count'] == 1]
 
@@ -70,3 +75,91 @@ def get_airlines_data(df):
             'good_airlines': good_json}
 
     return data
+
+def make_ml_table(df):
+    ml_df = df[['airline_name','airport_code', 'claim_type', 'close_amount', 'disposition']]
+    ml_df = ml_df.dropna(axis=0, how='any')
+
+    # Drop rows if missing values
+    ml_df = ml_df[ml_df.disposition != '-']
+
+    # convert monetary value to number
+    ml_df[['close_amount']] = ml_df[['close_amount']].replace('[\$,]', '', regex=True).astype(float)
+
+    return ml_df
+
+def run_ml(df):
+    """
+    Predict settlement based on airport/airline
+    """
+    scrubbed = make_ml_table(df)
+
+    # randomly set training/test subsets
+    scrubbed['is_train'] = np.random.uniform(0, 1, len(scrubbed)) <= .75
+    train, test = scrubbed[scrubbed['is_train'] == True], scrubbed[scrubbed['is_train'] == False]
+
+    airport_pred = airport_ml(test, train, scrubbed)
+    airline_pred = airline_ml(test, train, scrubbed)
+
+    return [airport_pred, airline_pred]
+
+
+def airport_ml(test, train, df):
+    """
+    Predict settlement based on airport
+    """
+    forest = RandomForestRegressor(n_jobs=1, n_estimators=70, max_features=0.5)
+    le = preprocessing.LabelEncoder()
+
+    le.fit(df['airport_code'])
+
+    train_airports = le.transform(train['airport_code'])
+    train_airports = train_airports[:, None]
+
+    test_airports = le.transform(test['airport_code'])
+    test_airports = test_airports[:, None]
+
+    forest.fit(train_airports, train['close_amount'])
+
+    predictions = forest.predict(test_airports)
+
+    compare = pd.DataFrame({"predicted": predictions, "actual": test['close_amount']})
+
+    mse = metrics.mean_squared_error(predictions, test['close_amount'])
+    r2 = metrics.r2_score(predictions, test['close_amount'])
+
+    MSE = 'MSE: {0:f}'.format(mse)
+    R2 = 'RSquared: {0:f}'.format(r2)
+
+    return [compare[0:20], MSE, R2]
+
+
+def airline_ml(test, train, df):
+    """
+    Predict settlement based on airport
+    """
+    forest = RandomForestRegressor(n_jobs=1, n_estimators=70, max_features=0.5)
+    le = preprocessing.LabelEncoder()
+
+    le.fit(df['airline_name'])
+
+    train_airports = le.transform(train['airline_name'])
+    train_airports = train_airports[:, None]
+
+    test_airports = le.transform(test['airline_name'])
+    test_airports = test_airports[:, None]
+
+    forest.fit(train_airports, train['close_amount'])
+
+    predictions = forest.predict(test_airports)
+
+    compare = pd.DataFrame({"predicted": predictions, "actual": test['close_amount']})
+
+    mse = metrics.mean_squared_error(predictions, test['close_amount'])
+    r2 = metrics.r2_score(predictions, test['close_amount'])
+
+    MSE = 'MSE: {0:f}'.format(mse)
+    R2 = 'RSquared: {0:f}'.format(r2)
+
+    return [compare[0:20], MSE, R2]
+

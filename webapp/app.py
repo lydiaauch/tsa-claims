@@ -1,8 +1,6 @@
 import sqlite3
 import pandas as pd
-import json
 from flask import Flask, render_template, jsonify
-import makeVis
 import analyzeData
 
 app = Flask(__name__)
@@ -18,6 +16,7 @@ def get_data():
     query = "select * from tsa_claims"
 
     df = pd.read_sql(query, connection)
+    table = analyzeData.run_ml(df)
 
     airlines_data = analyzeData.get_airlines_data(df)
     airport_data = analyzeData.get_airport_data(df)
