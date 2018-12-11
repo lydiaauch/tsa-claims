@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 
-DATA_PATH = '/Users/AUCHLY1/SideProjects/tsa-claims/tsa_data/claims-2010-2013_0.csv'
+DATA_PATH = '/tsa_data/claims-2010-2013_0.csv'
 
 def get_df():
     if os.path.exists(DATA_PATH):
