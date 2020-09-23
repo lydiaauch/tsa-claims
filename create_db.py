@@ -56,7 +56,7 @@ class Claims(Base):
 def populate_db():
     Base.metadata.create_all(engine)
     conn = sqlite3.connect("tsaclaims.db")
-    df = pd.read_csv('/tsa_data/claims-2010-2013_0.csv')
+    df = pd.read_csv('tsa_data/claims-2010-2013_0.csv')
     columns = ['claim_number', 'date_received', 'incident_date', 'airport_code', 'airport_name',
                'airline_name', 'claim_type', 'claim_site', 'item_category', 'close_amount', 'disposition']
     df.columns = columns
